@@ -6,10 +6,9 @@ export default (route) => (
   <div>
     <h2>Channels</h2>
     <ul className="nav nav-sidebar">
-      <li className="active"><Link to="/" >Overview</Link></li>
-      <li><Link to="/">Reports</Link></li>
-      <li><Link to="/">Analytics</Link></li>
-      <li><Link to="/">Export</Link></li>
+      <li className="active"><Link to="/channel/everything" >Overview</Link></li>
+      <li><Link to="/channel/banter">Banter</Link></li>
+      <li><Link to="/channel/oncall">On Call</Link></li>
     </ul>
   </div>
 )
