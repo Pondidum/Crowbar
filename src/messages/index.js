@@ -4,7 +4,7 @@ import { Col } from 'react-bootstrap'
 export default ({ match }) => (
   <Col sm={9} md={10} smOffset={3} mdOffset={2} className="main">
 
-    <h1>{match.path}</h1>
+    <h1>{match.params.channel}</h1>
     <hr />
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porttitor sapien vitae justo cursus, quis ultrices urna convallis. Proin sagittis ipsum eros, at posuere lorem eleifend vitae. Proin pellentesque pharetra ex, vel sollicitudin mi feugiat non. Suspendisse gravida ligula at massa consequat pulvinar. Quisque consequat ac lacus eu efficitur. Sed eu ultrices lectus. Curabitur non venenatis mauris. Vivamus non viverra dui, nec tempor est. Fusce bibendum, mi non viverra ultrices, lorem enim blandit odio, ut tempor ligula lacus vitae mi.</p>
     <p>Pellentesque pretium orci purus, vitae eleifend mi cursus at. Maecenas facilisis nisi vitae bibendum tempus. Curabitur sed lobortis quam. Sed a urna lacus. Sed mattis at felis non varius. Donec diam odio, convallis non fringilla ac, bibendum vel justo. Ut et diam id enim maximus consequat. Quisque commodo leo enim, in porttitor ligula faucibus ac. Proin euismod nulla vel massa semper, a ultrices augue porta. Suspendisse aliquet elit ac nibh blandit, ac fringilla risus interdum. Nunc mattis justo vel quam blandit tristique a quis diam. Proin ligula ante, rhoncus non egestas et, consectetur in massa. Quisque justo diam, euismod eu porttitor sed, vestibulum vitae ante. Suspendisse non purus urna.</p>

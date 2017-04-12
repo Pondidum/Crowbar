@@ -1,14 +1,13 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-
+import ChannelLink from './channelLink'
 
 export default (route) => (
   <div>
     <h2>Channels</h2>
     <ul className="nav nav-sidebar">
-      <li className="active"><Link to="/channel/everything" >Overview</Link></li>
-      <li><Link to="/channel/banter">Banter</Link></li>
-      <li><Link to="/channel/oncall">On Call</Link></li>
+      <ChannelLink to="/channel/everything">Everything</ChannelLink>
+      <ChannelLink to="/channel/banter">Banter</ChannelLink>
+      <ChannelLink to="/channel/oncall">On Call</ChannelLink>
     </ul>
   </div>
 )
