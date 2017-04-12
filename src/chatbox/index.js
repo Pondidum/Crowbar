@@ -1,13 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Col, FormGroup, FormControl } from 'react-bootstrap'
-
-const sendMessage = (message) => {
-  return {
-    type: 'SEND_MESSAGE',
-    message
-  }
-}
+import { sendMessage } from './actions'
 
 const mapDispatchToProps = (dispatch) => {
   return {
