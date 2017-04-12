@@ -23,7 +23,7 @@ const ChatBox = ({ sendMessage }) => {
     <Col sm={9} md={10} smOffset={3} mdOffset={2} className="chatbox well">
       <form onSubmit={submit}>
         <FormGroup>
-          <FormControl type="text" inputRef={x => textbox = x} placeholder="send a message..." />
+          <FormControl type="text" inputRef={x => textbox = x} autoFocus placeholder="send a message..." />
         </FormGroup>
       </form>
     </Col>
