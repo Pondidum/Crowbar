@@ -2,10 +2,12 @@ import { createStore, combineReducers } from 'redux'
 
 import messageReducers from './messages/reducers'
 import channelsReducers from './channels/reducers'
+import { reducer as cognito } from './cognito/user'
 
 const reducers = combineReducers({
   channels: channelsReducers,
-  messages: messageReducers
+  messages: messageReducers,
+  cognito
 })
 
 const store = createStore(

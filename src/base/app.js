@@ -1,16 +1,28 @@
 import React from 'react'
-import { Route, Router } from 'react-router'
+import { Router, Route, Redirect } from 'react-router'
+import { connect } from 'react-redux'
 
-import SideBar from '../sidebar'
-import Messages from '../messages'
-import ChatBox from '../chatbox'
+import LandingPage from './landing'
+import ChatApp from './chatApp'
+import UserPage from '../user'
 
-export default ({ history }) => (
+const mapStateToProps = (state, ownProps) => {
+  return {
+    user: state.cognito.user,
+    ...ownProps
+  }
+}
+
+const App = ({ history, user }) => (
   <Router history={history}>
-    <div className="row">
-      <SideBar />
-      <Route path="/channel/:channel" component={Messages} />
-      <ChatBox />
+    <div>
+      <Route path="/chat" render={() => (
+        user ? (<ChatApp />) : (<Redirect to="/" />)
+      )} />
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/user" component={UserPage} />
     </div>
   </Router>
-);
+)
+
+export default connect(mapStateToProps)(App)
