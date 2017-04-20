@@ -1,4 +1,5 @@
 import store from '../store'
+import { userChanged } from './actions'
 
 const {
   CognitoUser,
@@ -17,7 +18,7 @@ export let cognitoUser = null
 export function logout () {
   cognitoUser.signOut()
   cognitoUser = null
-  store.dispatch({ type: 'user/user', user: cognitoUser })
+  store.dispatch(userChanged(cognitoUser))
 }
 
 export function login(form) {
@@ -48,7 +49,7 @@ export function login(form) {
           }
         })
 
-        store.dispatch({ type: 'user/user', user: cognitoUser })
+        store.dispatch(userChanged(cognitoUser))
         resolve(result)
       }
 
@@ -61,7 +62,7 @@ export function reducer(state = { user: false }, action) {
 
   switch (action.type) {
 
-    case 'user/user':
+    case 'USER_CHANGED':
       return Object.assign({}, state, { user: action.user })
 
     default:
