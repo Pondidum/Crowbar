@@ -22,7 +22,7 @@ export function logout () {
 
 export function login(form) {
 
-  const { username, password } = form.password
+  const { username, password } = form
 
   return new Promise((resolve, reject) => {
     var auth = {
@@ -36,11 +36,19 @@ export function login(form) {
       Pool: userPool
     }
 
-    var cognitoUser = new CognitoUser(userData)
+    cognitoUser = new CognitoUser(userData)
     cognitoUser.authenticateUser(authenticationDetails, {
 
       onFailure: reject,
       onSuccess: result => {
+
+        window.AWSCognito.config.credentials = new window.AWSCognito.CognitoIdentityCredentials({
+          Logins: {
+            'cognito-idp.eu-west-1.amazonaws.com/eu-west-1_uPimxXveF': result.getIdToken().getJwtToken()
+          }
+        })
+
+        store.dispatch({ type: 'user/user', user: cognitoUser })
         resolve(result)
       }
 
