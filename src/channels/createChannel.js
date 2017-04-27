@@ -1,6 +1,20 @@
 import React, { Component } from 'react'
 import { Button, FormGroup, ControlLabel, FormControl, Modal } from 'react-bootstrap'
+import { connect } from 'react-redux'
+import { createChannel } from './actions'
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    userid: state.cognito.user.username,
+    channels: state.channels.available.map(channel => channel.name)
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    createChannel: (userid, name, description) => dispatch(createChannel(userid, name, description))
+  }
+}
 
 class CreateChannel extends Component {
 
@@ -14,8 +28,8 @@ class CreateChannel extends Component {
 
   render() {
 
-    let nameControl = null
-    let descriptionControl = null
+    let name = null
+    let description = null
 
     const onClose = () => this.setState({ showModal: false})
     const onClick = e => {
@@ -24,7 +38,8 @@ class CreateChannel extends Component {
     }
 
     const onCreate = () => {
-      //this.props.onCreate();
+      this.props.createChannel(this.props.userid, name.value, description.value)
+      onClose()
     }
 
     return (
@@ -39,11 +54,11 @@ class CreateChannel extends Component {
             <form>
               <FormGroup>
                 <ControlLabel>Channel Name</ControlLabel>
-                <FormControl type="text" inputRef={x => nameControl = x} autoFocus />
+                <FormControl type="text" inputRef={x => name = x} autoFocus />
               </FormGroup>
               <FormGroup>
                 <ControlLabel>Channel Description</ControlLabel>
-                <FormControl type="text" inputRef={x => descriptionControl = x} />
+                <FormControl type="text" inputRef={x => description = x} />
               </FormGroup>
             </form>
           </Modal.Body>
@@ -57,4 +72,4 @@ class CreateChannel extends Component {
   }
 }
 
-export default CreateChannel
+export default connect(mapStateToProps, mapDispatchToProps)(CreateChannel)
