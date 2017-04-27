@@ -37,7 +37,8 @@ class CreateChannel extends Component {
       this.setState({ showModal: true})
     }
 
-    const onCreate = () => {
+    const onCreate = e => {
+      e.preventDefault();
       this.props.createChannel(this.props.userid, name.value, description.value)
       onClose()
     }
@@ -47,11 +48,13 @@ class CreateChannel extends Component {
         <a href="#" onClick={onClick}>Create Channel...</a>
 
         <Modal show={this.state.showModal} onHide={onClose}>
+
           <Modal.Header closeButton>
             <Modal.Title>Create Channel</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <form>
+          <form onSubmit={onCreate}>
+
+            <Modal.Body>
               <FormGroup>
                 <ControlLabel>Channel Name</ControlLabel>
                 <FormControl type="text" inputRef={x => name = x} autoFocus />
@@ -60,12 +63,14 @@ class CreateChannel extends Component {
                 <ControlLabel>Channel Description</ControlLabel>
                 <FormControl type="text" inputRef={x => description = x} />
               </FormGroup>
-            </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button bsStyle="primary" onClick={onCreate}>Create</Button>
-            <Button onClick={onClose}>Cancel</Button>
-          </Modal.Footer>
+            </Modal.Body>
+
+            <Modal.Footer>
+              <Button type="submit" bsStyle="primary">Create</Button>
+              <Button onClick={onClose}>Cancel</Button>
+            </Modal.Footer>
+
+          </form>
         </Modal>
       </div>
     )
