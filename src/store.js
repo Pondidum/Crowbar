@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { apiMiddleware } from 'redux-api-middleware'
 
 import messageReducers from './messages/reducers'
 import channelsReducers from './channels/reducers'
@@ -10,9 +11,11 @@ const reducers = combineReducers({
   cognito
 })
 
-const store = createStore(
+const createStoreWithMiddlware = applyMiddleware(apiMiddleware)(createStore)
+
+const store = createStoreWithMiddlware(
   reducers,
-  // eslint-disable-next-line no-underscore-dangle
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 export default store
