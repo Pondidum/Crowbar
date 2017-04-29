@@ -16,7 +16,7 @@ const mapStateToProps = (state, ownProps) => {
 const App = ({ history, user }) => (
   <Router history={history}>
     <div>
-      <Route path="/" component={user ? ChatApp : LandingPage} />
+      <Route path="/" component={true ? ChatApp : LandingPage} />
       <Route path="/user" component={UserPage} />
     </div>
   </Router>
