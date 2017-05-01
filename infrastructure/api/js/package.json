@@ -1,0 +1,8 @@
+{
+  "name": "crowbarapi",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "uuid": "^3.0.1"
+  }
+}

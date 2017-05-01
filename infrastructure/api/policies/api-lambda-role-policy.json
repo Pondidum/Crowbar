@@ -13,6 +13,15 @@
           ]
       },
       {
+          "Effect": "Allow",
+          "Action": [
+              "dynamodb:PutItem"
+          ],
+          "Resource": [
+              "arn:aws:dynamodb:*:*:*"
+          ]
+      },
+      {
           "Sid": "Stmt1493060108000",
           "Effect": "Allow",
           "Action": [

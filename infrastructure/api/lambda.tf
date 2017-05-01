@@ -1,6 +1,6 @@
 data "archive_file" "api_lambda" {
   type = "zip"
-  source_file = "./js/eventapi.js"
+  source_dir = "./js"
   output_path = "./build/api-lambda.zip"
 }
 
