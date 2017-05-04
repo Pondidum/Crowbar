@@ -4,6 +4,9 @@ const uuid = require('uuid/v4')
 const triggerAggregates = require('./aggregates')
 const writeToStorage = require('./store')
 
+const writeError = (message, err) =>
+  console.log(message, JSON.stringify(err, null, 2))
+
 exports.handler = function(awsEvent, context, callback) {
   const event = Object.assign({}, JSON.parse(awsEvent.body), {
     timestamp: new Date().getTime(),
@@ -11,7 +14,10 @@ exports.handler = function(awsEvent, context, callback) {
   })
 
   writeToStorage(event)
-    .catch(err => console.log('Unable to store event', JSON.stringify(err, null, 2)))
-    .then(data => callback(null, { statusCode: '200' }))
-  //triggerAggregates(event)
+    .catch(err => writeError('Unable to store event', err))
+    .then(data => {
+      triggerAggregates(event)
+        .catch(err => writeError('Unable to trigger aggregates', err))
+        .then(() => callback(null, { statusCode: '200' }))
+    })
 }

@@ -1,7 +1,22 @@
 const aws = require('aws-sdk')
 
 const getAggregateFunctions = () => {
-  return [] //list the functions here to start with, move to s3 later.
+  const s3 = new aws.S3()
+
+  const query = {
+    Bucket: 'crowbar-store',
+    Key: 'events/projections.json'
+  }
+
+  return new Promise((resolve, reject) =>
+    s3.getObject(query, (err, data) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(JSON.parse(data.Body))
+      }
+    })
+  )
 }
 
 const triggerAggregates = event => {
@@ -9,16 +24,25 @@ const triggerAggregates = event => {
     region: 'eu-west-1'
   })
 
-  const functions = getAggregateFunctions()
   const baseDto = {
     InvocationType: 'Event',
     Payload: JSON.stringify(event)
   }
 
-  functions
-    .map(functionName => Object.assign({}, baseDto, { FunctionName: functionName }))
-    .map(dto => lambda.invoke(dto))
-    .forEach(request => request.send())
+  return new Promise((resolve, reject) =>
+    getAggregateFunctions()
+      .catch(err => {
+        console.log('Unable to read projections file', err)
+        reject(err)
+      })
+      .then(functions => {
+        functions
+          .map(name => Object.assign({}, baseDto, { FunctionName: name }))
+          .map(dto => lambda.invoke(dto))
+          .forEach(request => request.send())
+        resolve()
+      })
+  )
 }
 
 module.exports = triggerAggregates
