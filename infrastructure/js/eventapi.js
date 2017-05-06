@@ -18,6 +18,6 @@ exports.handler = function(awsEvent, context, callback) {
     .then(data => {
       triggerAggregates(event)
         .catch(err => writeError('Unable to trigger aggregates', err))
-        .then(() => callback(null, { statusCode: '200' }))
+        .then(() => callback(null, { statusCode: '200', body: '{}' }))
     })
 }
