@@ -14,7 +14,16 @@ exports.handler = function(awsEvent, context, callback) {
   })
 
   writeToStorage(event)
-    .catch(err => writeError('Unable to store event', err))
+    .catch(err => {
+      writeError('Unable to store event', err)
+      callback(null, {
+        statusCode: '400',
+        body: JSON.stringify({
+          message: 'Unable to store event',
+          exception: err
+        })
+      })
+    })
     .then(data => {
       triggerAggregates(event)
         .catch(err => writeError('Unable to trigger aggregates', err))
