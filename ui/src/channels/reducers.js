@@ -50,7 +50,7 @@ export default (state = defaultState, action) => {
     }
 
     case 'CREATE_CHANNEL_FAILURE': {
-      const channel = createChannel(action.payload, 'ERROR')
+      const channel = createChannel(action.payload.request, 'ERROR')
 
       return Object.assign({}, state, {
         available: replaceChannel(state.available, channel)

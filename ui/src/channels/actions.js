@@ -1,4 +1,4 @@
-import { CALL_API } from 'redux-api-middleware'
+import { CALL_API, getJSON, ApiError } from 'redux-api-middleware'
 import uuid from 'uuid/v4'
 
 export const viewChannel = channelName => {
@@ -26,7 +26,16 @@ export const createChannel = (userId, channelName, channelDescription) => {
       types: [
         { type: 'CREATE_CHANNEL_REQUEST', payload: event },
         { type: 'CREATE_CHANNEL_SUCCESS', payload: event },
-        { type: 'CREATE_CHANNEL_FAILURE', payload: event }
+        {
+          type: 'CREATE_CHANNEL_FAILURE',
+          payload: (action, state, res) =>
+            getJSON(res).then(json =>
+              Object.assign(
+                { request: event },
+                new ApiError(res.status, res.statusText, json)
+              )
+            )
+        }
       ]
     }
   }
