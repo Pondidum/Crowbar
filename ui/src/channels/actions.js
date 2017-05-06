@@ -14,7 +14,7 @@ export const createChannel = (userId, channelName, channelDescription) => {
     timestamp: new Date().getTime(),
     channelId: uuid(),
     channelName,
-    channelDescription,
+    channelDescription: channelDescription === '' ? null : channelDescription,
     userId
   }
 
