@@ -5,7 +5,7 @@ const getAggregateFunctions = () => {
 
   const query = {
     Bucket: 'crowbar-store',
-    Key: 'events/projections.json'
+    Key: 'events/aggregates.json'
   }
 
   return new Promise((resolve, reject) =>

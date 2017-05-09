@@ -11,6 +11,7 @@ export const viewChannel = channelName => {
 export const createChannel = (userId, channelName, channelDescription) => {
   const event = {
     eventId: uuid(),
+    type: 'CREATE_CHANNEL',
     timestamp: new Date().getTime(),
     channelId: uuid(),
     channelName,
