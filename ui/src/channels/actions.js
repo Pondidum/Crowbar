@@ -8,8 +8,8 @@ export const viewChannel = channelName => {
   }
 }
 
-export const createChannel = (userId, channelName, channelDescription) => {
-  const event = {
+export const createEvent = (userId, channelName, channelDescription) => {
+  return {
     eventId: uuid(),
     type: 'CREATE_CHANNEL',
     timestamp: new Date().getTime(),
@@ -18,6 +18,10 @@ export const createChannel = (userId, channelName, channelDescription) => {
     channelDescription: channelDescription === '' ? null : channelDescription,
     userId
   }
+}
+
+export const createChannel = (userId, channelName, channelDescription) => {
+  const event = createEvent(userId, channelName, channelDescription)
 
   return {
     [CALL_API]: {

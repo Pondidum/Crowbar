@@ -9,7 +9,7 @@ const createChannel = (action, status = '') => {
 }
 
 const replaceChannel = (available, channel) => {
-  let index = available.findIndex(c => c.channelId === channel.channelId)
+  let index = available.findIndex(c => c.id === channel.id)
 
   if (index < 0) {
     index = available.length
