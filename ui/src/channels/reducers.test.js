@@ -1,12 +1,12 @@
 //const expect = require('chai').expect
 import uuid from 'uuid/v4'
 
-import { createEvent } from './actions'
+import { createChannelEvent } from './actions'
 import reducer from './reducers'
 
 it('handles CREATE_CHANNEL_REQUEST with no existing channels', () => {
   const state = { available: [] }
-  const event = createEvent(uuid(), 'new channel', 'some description')
+  const event = createChannelEvent(uuid(), 'new channel', 'some description')
 
   const newState = reducer(state, {
     type: 'CREATE_CHANNEL_REQUEST',
@@ -37,7 +37,7 @@ it('handles CREATE_CHANNEL_REQUEST with one existing channel', () => {
     ]
   }
 
-  const event = createEvent(uuid(), 'new channel', 'some description')
+  const event = createChannelEvent(uuid(), 'new channel', 'some description')
 
   const newState = reducer(state, {
     type: 'CREATE_CHANNEL_REQUEST',
@@ -82,7 +82,7 @@ it('handles CREATE_CHANNEL_REQUEST with two existing channels', () => {
     ]
   }
 
-  const event = createEvent(uuid(), 'new channel', 'some description')
+  const event = createChannelEvent(uuid(), 'new channel', 'some description')
 
   const newState = reducer(state, {
     type: 'CREATE_CHANNEL_REQUEST',
@@ -115,7 +115,7 @@ it('handles CREATE_CHANNEL_REQUEST with two existing channels', () => {
 })
 
 it('handles CREATE_CHANNEL_SUCCESS with an existing channel', () => {
-  const event = createEvent(uuid(), 'new channel', 'some description')
+  const event = createChannelEvent(uuid(), 'new channel', 'some description')
   const state = {
     available: [
       {

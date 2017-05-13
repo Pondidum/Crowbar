@@ -1,27 +1,20 @@
 import { CALL_API, getJSON, ApiError } from 'redux-api-middleware'
 import uuid from 'uuid/v4'
 
-export const viewChannel = channelName => {
-  return {
-    type: 'VIEW_CHANNEL',
-    channelName
-  }
-}
-
-export const createEvent = (userId, channelName, channelDescription) => {
+export const createChannelEvent = (userId, name, desc) => {
   return {
     eventId: uuid(),
     type: 'CREATE_CHANNEL',
     timestamp: new Date().getTime(),
     channelId: uuid(),
-    channelName,
-    channelDescription: channelDescription === '' ? null : channelDescription,
+    name,
+    channelDescription: desc === '' ? null : desc,
     userId
   }
 }
 
 export const createChannel = (userId, channelName, channelDescription) => {
-  const event = createEvent(userId, channelName, channelDescription)
+  const event = createChannelEvent(userId, channelName, channelDescription)
 
   return {
     [CALL_API]: {
