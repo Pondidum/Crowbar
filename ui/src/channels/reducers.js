@@ -45,6 +45,12 @@ export default (state = defaultState, action) => {
       return handleCreateChannel(state, action.payload.request, action.type)
     }
 
+    case 'LIST_ALL_CHANNELS_SUCCESS': {
+      return Object.assign({}, state, {
+        available: action.payload
+      })
+    }
+
     default:
       return state
   }

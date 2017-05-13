@@ -7,7 +7,7 @@ export const createChannelEvent = (userId, name, desc) => {
     type: 'CREATE_CHANNEL',
     timestamp: new Date().getTime(),
     channelId: uuid(),
-    name,
+    channelName: name,
     channelDescription: desc === '' ? null : desc,
     userId
   }
@@ -34,6 +34,20 @@ export const createChannel = (userId, channelName, channelDescription) => {
               )
             )
         }
+      ]
+    }
+  }
+}
+
+export const listAllChannels = () => {
+  return {
+    [CALL_API]: {
+      endpoint: 'https://s3-eu-west-1.amazonaws.com/crowbar-store/events/views/allchannels.json',
+      method: 'GET',
+      types: [
+        'LIST_ALL_CHANNELS_REQUEST',
+        'LIST_ALL_CHANNELS_SUCCESS',
+        'LIST_ALL_CHANNELS_FAILURE'
       ]
     }
   }
