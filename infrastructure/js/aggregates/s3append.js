@@ -17,7 +17,9 @@ const appendToObject = (key, callback) => {
     const content = callback(body)
 
     const command = Object.assign({}, query, {
-      Body: JSON.stringify(content, null, 2)
+      Body: JSON.stringify(content, null, 2),
+      ContentType: 'application/json',
+      ACL: 'public-read'
     })
 
     s3.putObject(command, (err, data) => {
