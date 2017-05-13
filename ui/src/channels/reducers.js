@@ -21,6 +21,11 @@ const replaceChannel = (available, channel) => {
   return before.concat([channel]).concat(after)
 }
 
+const handleCreateChannel = (state, event, type) =>
+  Object.assign({}, state, {
+    available: replaceChannel(state.available, createChannel(event, type))
+  })
+
 const defaultState = {
   available: [],
   selectedChannel: null
@@ -28,33 +33,16 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case 'VIEW_CHANNEL':
-      return Object.assign({}, state, {
-        selectedChannel: action.channelName
-      })
-
     case 'CREATE_CHANNEL_REQUEST': {
-      const channel = createChannel(action.payload, 'PENDING')
-
-      return Object.assign({}, state, {
-        available: replaceChannel(state.available, channel)
-      })
+      return handleCreateChannel(state, action.payload, action.type)
     }
 
     case 'CREATE_CHANNEL_SUCCESS': {
-      const channel = createChannel(action.payload)
-
-      return Object.assign({}, state, {
-        available: replaceChannel(state.available, channel)
-      })
+      return handleCreateChannel(state, action.payload, action.type)
     }
 
     case 'CREATE_CHANNEL_FAILURE': {
-      const channel = createChannel(action.payload.request, 'ERROR')
-
-      return Object.assign({}, state, {
-        available: replaceChannel(state.available, channel)
-      })
+      return handleCreateChannel(state, action.payload.request, action.type)
     }
 
     default:
