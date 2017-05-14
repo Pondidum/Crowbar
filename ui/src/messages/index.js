@@ -3,8 +3,13 @@ import { connect } from 'react-redux'
 import { Col } from 'react-bootstrap'
 
 const mapStateToProps = (state, ownProps) => {
+  const channel = state.channels.available.find(
+    c => c.name === ownProps.match.params.channel
+  )
+
   return {
-    messages: state.messages,
+    channelId: channel && channel.id,
+    messages: channel ? state.messages[channel.id] || [] : [],
     ...ownProps
   }
 }
@@ -15,9 +20,9 @@ const Messages = ({ match, messages }) => (
     <h1>{match.params.channel}</h1>
     <hr />
     <ul>
-      {messages.map((message, index) => (<li key={index}>{message}</li>))}
+      {messages.map((message, index) => <li key={index}>{message}</li>)}
     </ul>
   </Col>
-);
+)
 
-export default connect(mapStateToProps)(Messages);
+export default connect(mapStateToProps)(Messages)
