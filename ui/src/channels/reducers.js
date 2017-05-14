@@ -41,7 +41,7 @@ export default (state = defaultState, action) => {
     }
 
     case 'CREATE_CHANNEL_FAILURE': {
-      return handleCreateChannel(state, action.payload.request, action.type)
+      return handleCreateChannel(state, action.payload, action.type)
     }
 
     case 'LIST_ALL_CHANNELS_SUCCESS': {

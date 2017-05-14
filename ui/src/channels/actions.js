@@ -28,10 +28,9 @@ export const createChannel = (userId, channelName, channelDescription) => {
           type: 'CREATE_CHANNEL_FAILURE',
           payload: (action, state, res) =>
             getJSON(res).then(json =>
-              Object.assign(
-                { request: event },
-                new ApiError(res.status, res.statusText, json)
-              )
+              Object.assign({}, event, {
+                error: new ApiError(res.status, res.statusText, json)
+              })
             )
         }
       ]
