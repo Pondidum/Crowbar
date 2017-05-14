@@ -27,8 +27,7 @@ const handleCreateChannel = (state, event, type) =>
   })
 
 const defaultState = {
-  available: [],
-  selectedChannel: null
+  available: []
 }
 
 export default (state = defaultState, action) => {

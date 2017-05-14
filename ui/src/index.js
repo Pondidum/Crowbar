@@ -36,7 +36,7 @@ render(
     <ConnectedRouter history={history}>
       <div>
         <Route path="/" exact component={LandingPage} />
-        <Route path="/chat" component={ChatApp} />
+        <Route path="/chat/:channel?" component={ChatApp} />
         <Route path="/user" component={UserPage} />
       </div>
     </ConnectedRouter>
