@@ -16,7 +16,7 @@ const ChannelList = ({ channels }) => (
     <CreateChannel />
     <ul className="nav nav-sidebar">
       {channels.map((channel, i) => (
-        <ChannelLink key={i} to={'/channel/' + channel.name}>
+        <ChannelLink key={i} to={'/chat/' + channel.name}>
           {channel.name}
         </ChannelLink>
       ))}

@@ -7,8 +7,8 @@ import ChatBox from '../chatbox'
 
 const ChatApp = () => (
   <div className="row">
-    <Route path="/channel/:channel?" component={SideBar} />
-    <Route path="/channel/:channel?" component={Messages} />
+    <Route path="/chat/:channel?" component={SideBar} />
+    <Route path="/chat/:channel?" component={Messages} />
     <ChatBox />
   </div>
 )

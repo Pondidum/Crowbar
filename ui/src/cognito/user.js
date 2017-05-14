@@ -1,4 +1,3 @@
-import store from '../store'
 import { userChanged } from './actions'
 
 const {
@@ -15,14 +14,13 @@ const userPool = new CognitoUserPool({
 
 export let cognitoUser = null
 
-export function logout () {
+export function logout(dispatch) {
   cognitoUser.signOut()
   cognitoUser = null
-  store.dispatch(userChanged(cognitoUser))
+  dispatch(userChanged(cognitoUser))
 }
 
-export function login(form) {
-
+export function login(form, dispatch) {
   const { username, password } = form
 
   return new Promise((resolve, reject) => {
@@ -39,33 +37,30 @@ export function login(form) {
 
     cognitoUser = new CognitoUser(userData)
     cognitoUser.authenticateUser(authenticationDetails, {
-
       onFailure: reject,
       onSuccess: result => {
-
-        window.AWSCognito.config.credentials = new window.AWSCognito.CognitoIdentityCredentials({
+        window.AWSCognito.config.credentials = new window.AWSCognito
+          .CognitoIdentityCredentials({
           Logins: {
-            'cognito-idp.eu-west-1.amazonaws.com/eu-west-1_uPimxXveF': result.getIdToken().getJwtToken()
+            'cognito-idp.eu-west-1.amazonaws.com/eu-west-1_uPimxXveF': result
+              .getIdToken()
+              .getJwtToken()
           }
         })
 
-        store.dispatch(userChanged(cognitoUser))
+        dispatch(userChanged(cognitoUser))
         resolve(result)
       }
-
     })
-
   })
 }
 
 export function reducer(state = { user: false }, action) {
-
   switch (action.type) {
-
     case 'USER_CHANGED':
       return Object.assign({}, state, { user: action.user })
 
     default:
-      return state;
+      return state
   }
 }
