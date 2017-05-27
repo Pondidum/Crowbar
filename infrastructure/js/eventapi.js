@@ -7,6 +7,17 @@ const writeToStorage = require('./store')
 const writeError = (message, err) =>
   console.log(message, JSON.stringify(err, null, 2))
 
+const handleStorageError = (callback, err) => {
+  writeError('Unable to store event', err)
+  callback(null, {
+    statusCode: '400',
+    body: JSON.stringify({
+      message: 'Unable to store event',
+      exception: err
+    })
+  })
+}
+
 exports.handler = function(awsEvent, context, callback) {
   const event = Object.assign({}, JSON.parse(awsEvent.body), {
     timestamp: new Date().getTime(),
@@ -14,16 +25,7 @@ exports.handler = function(awsEvent, context, callback) {
   })
 
   writeToStorage(event)
-    .catch(err => {
-      writeError('Unable to store event', err)
-      callback(null, {
-        statusCode: '400',
-        body: JSON.stringify({
-          message: 'Unable to store event',
-          exception: err
-        })
-      })
-    })
+    .catch(err => handleStorageError(callback, err))
     .then(data => {
       triggerAggregates(event)
         .catch(err => writeError('Unable to trigger aggregates', err))
