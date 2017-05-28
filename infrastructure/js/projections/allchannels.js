@@ -1,6 +1,7 @@
 const updateChannel = (view, channelId, modification) => {
   const index = view.findIndex(c => c.id === channelId)
-  const newChannel = Object.assign({}, modification(view[index]))
+  const current = view[index]
+  const newChannel = Object.assign({}, current, modification(current))
 
   const before = view.slice(0, index)
   const after = view.slice(index + 1, view.length)
@@ -32,7 +33,7 @@ const handlers = {
 
   USER_LEFT_CHANNEL: (view, event) => {
     return updateChannel(view, event.channelId, existing => {
-      return { users: existing.users - 1 }
+      return { users: Math.max(existing.users - 1, 0) }
     })
   }
 }
