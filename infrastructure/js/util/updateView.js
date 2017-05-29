@@ -10,17 +10,25 @@ const updateView = ({ s3 = new aws.S3(), viewName, id, callback }) => {
     Key: path
   }
 
-  s3.getObject(query, (err, data) => {
-    const body = data && data.Body ? JSON.parse(data.Body) : {}
-    const content = callback(body) || body
+  return new Promise((resolve, reject) => {
+    s3.getObject(query, (err, data) => {
+      const body = data && data.Body ? JSON.parse(data.Body) : {}
+      const content = callback(body) || body
 
-    const command = Object.assign({}, query, {
-      Body: JSON.stringify(content, null, 2),
-      ContentType: 'application/json',
-      ACL: 'public-read'
+      const command = Object.assign({}, query, {
+        Body: JSON.stringify(content, null, 2),
+        ContentType: 'application/json',
+        ACL: 'public-read'
+      })
+
+      s3.putObject(command, (err, data) => {
+        if (!err) {
+          resolve()
+        } else {
+          reject(err)
+        }
+      })
     })
-
-    s3.putObject(command, (err, data) => {})
   })
 }
 
