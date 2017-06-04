@@ -4,7 +4,7 @@ import uuid from 'uuid/v4'
 export const createChannelEvent = (userId, name, desc) => {
   return {
     eventId: uuid(),
-    type: 'CREATE_CHANNEL',
+    type: 'CHANNEL_CREATED',
     timestamp: new Date().getTime(),
     channelId: uuid(),
     channelName: name,
