@@ -1,0 +1,15 @@
+{
+  "name": "crowbarapi",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "jest --watchAll"
+  },
+  "dependencies": {
+    "uuid": "^3.0.1"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.58.0",
+    "jest": "^20.0.4"
+  }
+}

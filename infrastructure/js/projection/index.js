@@ -1,6 +1,6 @@
-const updateView = require('../util/updateView')
-const allChannels = require('./allchannels')
-const allUsers = require('./allusers')
+const updateView = require('./util/updateView')
+const allChannels = require('./projections/allchannels')
+const allUsers = require('./projections/allusers')
 
 const projections = [allChannels, allUsers]
 
