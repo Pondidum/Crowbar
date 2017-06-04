@@ -8,21 +8,29 @@ const mapStateToProps = (state, ownProps) => {
   )
 
   return {
-    channelId: channel && channel.id,
-    messages: channel ? state.messages[channel.id] || [] : [],
-    ...ownProps
+    channel: channel || {},
+    messages: channel ? state.messages[channel.id] || [] : []
   }
 }
 
-const Messages = ({ match, messages }) => (
-  <Col sm={9} md={10} smOffset={3} mdOffset={2} className="main">
+const renderMessage = (message, index) => {
+  const style = {}
+  if (message.status === 'FAILED') style.color = 'red'
+  if (message.status === 'PENDING') style.color = '#999'
 
-    <h1>{match.params.channel}</h1>
-    <hr />
-    <ul>
-      {messages.map((message, index) => <li key={index}>{message.text}</li>)}
-    </ul>
-  </Col>
-)
+  return <li key={index} style={style}>{message.text}</li>
+}
+
+const Messages = ({ channel, messages }) => {
+  return (
+    <Col sm={9} md={10} smOffset={3} mdOffset={2} className="main">
+      <h1>{channel.name}</h1>{channel.description}
+      <hr />
+      <ul className="list-unstyled">
+        {messages.map((message, index) => renderMessage(message, index))}
+      </ul>
+    </Col>
+  )
+}
 
 export default connect(mapStateToProps)(Messages)
