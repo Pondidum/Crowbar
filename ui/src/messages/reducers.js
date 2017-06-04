@@ -10,7 +10,11 @@ const createMessage = (event, status = '') => {
 }
 
 const updateMessages = (messages, replacement) => {
-  const index = messages.findIndex(c => c.messageId === replacement.messageId)
+  let index = messages.findIndex(c => c.messageId === replacement.messageId)
+
+  if (index < 0) {
+    index = messages.length
+  }
 
   const before = messages.slice(0, index)
   const after = messages.slice(index + 1, messages.length)
