@@ -10,8 +10,10 @@ const handlers = {
   USER_LEFT_CHANNEL: (view, event) => {}
 }
 
+const defaultHandler = () => {}
+
 module.exports = event => {
-  const handler = handlers[event.type]
+  const handler = handlers[event.type] || defaultHandler
 
   return {
     viewName: 'allusers',

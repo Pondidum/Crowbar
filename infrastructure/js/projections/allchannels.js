@@ -1,7 +1,6 @@
 const updateChannel = (view, channelId, modification) => {
   const index = view.findIndex(c => c.id === channelId)
-  const current = view[index]
-  const newChannel = Object.assign({}, current, modification(current))
+  const newChannel = Object.assign({}, view[index], modification(view[index]))
 
   const before = view.slice(0, index)
   const after = view.slice(index + 1, view.length)
@@ -9,16 +8,18 @@ const updateChannel = (view, channelId, modification) => {
   return before.concat([newChannel]).concat(after)
 }
 
+const createChannel = event => {
+  return {
+    id: event.channelId,
+    name: event.channelName,
+    description: event.channelDescription,
+    users: 0
+  }
+}
+
 const handlers = {
   CHANNEL_CREATED: (view, event) => {
-    return view.concat([
-      {
-        id: event.channelId,
-        name: event.channelName,
-        description: event.channelDescription,
-        users: 0
-      }
-    ])
+    return view.concat([createChannel(event)])
   },
 
   CHANNEL_DESTROYED: (view, event) => {
@@ -38,8 +39,10 @@ const handlers = {
   }
 }
 
+const defaultHandler = () => {}
+
 module.exports = event => {
-  const handler = handlers[event.type]
+  const handler = handlers[event.type] || defaultHandler
 
   return {
     viewName: 'allchannels',

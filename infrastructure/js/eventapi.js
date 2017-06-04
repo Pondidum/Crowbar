@@ -1,7 +1,7 @@
 'use strict'
 
 const uuid = require('uuid/v4')
-const triggerAggregates = require('./aggregates')
+const project = require('./project')
 const writeToStorage = require('./store')
 
 const writeError = (message, err) =>
@@ -27,8 +27,8 @@ exports.handler = function(awsEvent, context, callback) {
   writeToStorage(event)
     .catch(err => handleStorageError(callback, err))
     .then(data => {
-      triggerAggregates(event)
-        .catch(err => writeError('Unable to trigger aggregates', err))
+      project(event)
+        .catch(err => writeError('Unable to trigger projections', err))
         .then(() => callback(null, { statusCode: '200', body: '{}' }))
     })
 }
