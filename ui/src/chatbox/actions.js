@@ -4,8 +4,9 @@ import uuid from 'uuid/v4'
 export const sendMessage = (userId, channelId, message) => {
   const event = {
     eventId: uuid(),
-    type: 'SEND_MESSAGE',
+    type: 'MESSAGE_SENT',
     timestamp: new Date().getTime(),
+    messageId: uuid(),
     userId,
     channelId,
     message

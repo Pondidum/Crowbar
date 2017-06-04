@@ -20,7 +20,7 @@ const Messages = ({ match, messages }) => (
     <h1>{match.params.channel}</h1>
     <hr />
     <ul>
-      {messages.map((message, index) => <li key={index}>{message}</li>)}
+      {messages.map((message, index) => <li key={index}>{message.text}</li>)}
     </ul>
   </Col>
 )
