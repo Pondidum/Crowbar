@@ -19,10 +19,12 @@ const handleStorageError = (callback, err) => {
 }
 
 exports.handler = function(awsEvent, context, callback) {
-  const event = Object.assign({}, JSON.parse(awsEvent.body), {
-    timestamp: new Date().getTime(),
-    eventId: uuid()
-  })
+  const basic = { eventId: uuid() }
+  const override = {
+    timestamp: new Date().getTime()
+  }
+
+  const event = Object.assign(basic, JSON.parse(awsEvent.body), override)
 
   writeToStorage(event)
     .catch(err => handleStorageError(callback, err))
