@@ -1,6 +1,4 @@
-'use strict'
-
-const uuid = require('uuid/v4')
+const enhance = require('./enhance')
 const project = require('./project')
 const writeToStorage = require('./store')
 
@@ -19,12 +17,7 @@ const handleStorageError = (callback, err) => {
 }
 
 exports.handler = function(awsEvent, context, callback) {
-  const basic = { eventId: uuid() }
-  const override = {
-    timestamp: new Date().getTime()
-  }
-
-  const event = Object.assign(basic, JSON.parse(awsEvent.body), override)
+  const event = enhance.event(awsEvent.body)
 
   writeToStorage(event)
     .catch(err => handleStorageError(callback, err))
