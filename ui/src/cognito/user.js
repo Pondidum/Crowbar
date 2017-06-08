@@ -1,9 +1,10 @@
 import { userChanged } from './actions'
+import uuid from 'uuid/v4'
 
 const {
   CognitoUser,
   CognitoUserPool,
-  // CognitoUserAttribute,
+  CognitoUserAttribute,
   AuthenticationDetails
 } = window.AWSCognito.CognitoIdentityServiceProvider
 
@@ -13,6 +14,36 @@ const userPool = new CognitoUserPool({
 })
 
 export let cognitoUser = null
+
+export function register(userData, dispatch) {
+  const attributeList = [
+    new CognitoUserAttribute({ Name: 'email', Value: userData.username })
+  ]
+
+  return new Promise((resolve, reject) => {
+    userPool.signUp(
+      uuid(),
+      userData.password,
+      attributeList,
+      null,
+      (err, result) => {
+        if (err) return reject(err)
+        cognitoUser = result.user
+        dispatch(userChanged(cognitoUser))
+        resolve(result.user)
+      }
+    )
+  })
+}
+
+export function verify(form, dispatch) {
+  return new Promise((resolve, reject) =>
+    cognitoUser.confirmRegistration(form.code, false, (err, data) => {
+      if (err) reject(err)
+      else resolve(data)
+    })
+  )
+}
 
 export function logout(dispatch) {
   cognitoUser.signOut()
