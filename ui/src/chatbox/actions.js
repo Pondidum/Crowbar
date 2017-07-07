@@ -1,5 +1,6 @@
 import { CALL_API } from 'redux-api-middleware'
 import uuid from 'uuid/v4'
+import { API_URL } from '../constants'
 
 export const sendMessage = (userId, channelId, message) => {
   const event = {
@@ -14,7 +15,7 @@ export const sendMessage = (userId, channelId, message) => {
 
   return {
     [CALL_API]: {
-      endpoint: 'https://9a0hixeit8.execute-api.eu-west-1.amazonaws.com/api/events',
+      endpoint: API_URL,
       method: 'POST',
       body: JSON.stringify(event),
       types: [

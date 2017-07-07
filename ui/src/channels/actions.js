@@ -1,4 +1,5 @@
 import { CALL_API, getJSON, ApiError } from 'redux-api-middleware'
+import { API_URL, VIEWS_URL } from '../constants'
 import uuid from 'uuid/v4'
 
 export const createChannelEvent = (userId, name, desc) => {
@@ -18,7 +19,7 @@ export const createChannel = (userId, channelName, channelDescription) => {
 
   return {
     [CALL_API]: {
-      endpoint: 'https://9a0hixeit8.execute-api.eu-west-1.amazonaws.com/api/events',
+      endpoint: API_URL,
       method: 'POST',
       body: JSON.stringify(event),
       types: [
@@ -41,7 +42,7 @@ export const createChannel = (userId, channelName, channelDescription) => {
 export const listAllChannels = () => {
   return {
     [CALL_API]: {
-      endpoint: 'https://s3-eu-west-1.amazonaws.com/crowbar-store/events/views/allchannels.json',
+      endpoint: VIEWS_URL + 'allchannels.json',
       method: 'GET',
       types: [
         'LIST_ALL_CHANNELS_REQUEST',
