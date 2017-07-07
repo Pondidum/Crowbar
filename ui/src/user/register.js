@@ -28,7 +28,7 @@ const RegisterForm = ({ history, dispatch }) => {
     }
 
     register(form, dispatch)
-      .then(data => history.push('/verify'))
+      .then(data => history.push('/user/verify'))
       .catch(e => console.error(e))
   }
 
