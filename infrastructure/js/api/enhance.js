@@ -1,6 +1,6 @@
 const uuid = require('uuid')
 
-exports.enhance = {
+module.exports = {
   event: e => {
     const basic = { eventId: uuid() }
     const override = {
