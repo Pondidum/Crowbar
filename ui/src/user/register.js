@@ -17,14 +17,16 @@ const mapDispatchToProps = dispatch => {
 }
 
 const RegisterForm = ({ history, dispatch }) => {
-  var usernameControl
+  var emailControl
   var passwordControl
+  var nameControl
 
   const onSubmit = e => {
     e.preventDefault()
     const form = {
-      username: usernameControl.value,
-      password: passwordControl.value
+      username: emailControl.value,
+      password: passwordControl.value,
+      name: nameControl.value
     }
 
     register(form, dispatch)
@@ -36,10 +38,14 @@ const RegisterForm = ({ history, dispatch }) => {
     <Col sm={6} smOffset={3} className="well">
       <h1>Register</h1>
       <form>
-
         <FormGroup controlId="username">
-          <ControlLabel>Username</ControlLabel>
-          <FormControl type="text" inputRef={x => (usernameControl = x)} />
+          <ControlLabel>Email Address</ControlLabel>
+          <FormControl type="text" inputRef={x => (emailControl = x)} />
+        </FormGroup>
+
+        <FormGroup>
+          <ControlLabel>Display Name</ControlLabel>
+          <FormControl type="text" inputRef={x => (nameControl = x)} />
         </FormGroup>
 
         <FormGroup controlId="password">
@@ -47,7 +53,9 @@ const RegisterForm = ({ history, dispatch }) => {
           <FormControl type="password" inputRef={x => (passwordControl = x)} />
         </FormGroup>
 
-        <Button type="submit" onClick={onSubmit}>Register</Button>
+        <Button type="submit" onClick={onSubmit}>
+          Register
+        </Button>
       </form>
     </Col>
   )

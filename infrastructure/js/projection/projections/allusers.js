@@ -2,7 +2,7 @@ const handlers = {
   USER_REGISTERED: (view, event) => {
     return Object.assign({}, view, {
       [event.userId]: {
-        name: event.userName
+        name: event.name
       }
     })
   },

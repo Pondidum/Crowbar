@@ -17,7 +17,8 @@ export let cognitoUser = null
 
 export function register(userData, dispatch) {
   const attributeList = [
-    new CognitoUserAttribute({ Name: 'email', Value: userData.username })
+    new CognitoUserAttribute({ Name: 'email', Value: userData.username }),
+    new CognitoUserAttribute({ Name: 'nickname', Value: userData.name })
   ]
 
   return new Promise((resolve, reject) => {

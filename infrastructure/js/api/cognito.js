@@ -13,7 +13,8 @@ exports.handler = (awsEvent, context) => {
   const event = enhance.event({
     type: 'USER_REGISTERED',
     userId: attributes.sub,
-    email: attributes.email
+    email: attributes.email,
+    name: attributes.nickname
   })
 
   writeToStorage(event)
