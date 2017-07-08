@@ -24,7 +24,7 @@ it('handles a new channel with a new message', () => {
         messageId: event.messageId,
         text: event.message,
         userId: event.userId,
-        status: ''
+        timestamp: event.timestamp
       }
     ]
   })
@@ -38,7 +38,7 @@ it('handles an existing channel with a new message', () => {
         messageId: '0',
         text: 'original',
         userId: '0',
-        status: ''
+        timestamp: 123
       }
     ]
   })
@@ -49,13 +49,13 @@ it('handles an existing channel with a new message', () => {
         messageId: '0',
         text: 'original',
         userId: '0',
-        status: ''
+        timestamp: 123
       },
       {
         messageId: event.messageId,
         text: event.message,
         userId: event.userId,
-        status: ''
+        timestamp: event.timestamp
       }
     ]
   })

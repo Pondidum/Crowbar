@@ -2,9 +2,9 @@ const handlers = {
   MESSAGE_SENT: (view, event) => {
     const message = {
       messageId: event.messageId,
+      timestamp: event.timestamp,
       text: event.message,
-      userId: event.userId,
-      status: ''
+      userId: event.userId
     }
 
     const existingChannel = view[event.channelId] || []
