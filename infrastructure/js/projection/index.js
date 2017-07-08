@@ -1,8 +1,10 @@
 const updateView = require('./util/updateView')
+
 const allChannels = require('./projections/allchannels')
 const allUsers = require('./projections/allusers')
+const allMessages = require('./projections/allmessages')
 
-const projections = [allChannels, allUsers]
+const projections = [allChannels, allUsers, allMessages]
 
 exports.handler = event => {
   const promises = projections.map(project => {
