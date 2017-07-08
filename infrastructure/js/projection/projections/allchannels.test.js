@@ -1,12 +1,12 @@
 const projection = require('./allchannels')
 
 const createEvent = type => {
-  return (event = {
+  return {
     type: type,
     channelId: 123,
     channelName: 'some channel',
     channelDescription: 'some description'
-  })
+  }
 }
 
 it('handles CHANNEL_CREATED when there are no channels', () => {
