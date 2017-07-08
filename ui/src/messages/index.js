@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Col } from 'react-bootstrap'
+import Message from './message'
 
 const mapStateToProps = (state, ownProps) => {
   const channel = state.channels.available.find(
@@ -13,21 +14,18 @@ const mapStateToProps = (state, ownProps) => {
   }
 }
 
-const renderMessage = (message, index) => {
-  const style = {}
-  if (message.status === 'FAILED') style.color = 'red'
-  if (message.status === 'PENDING') style.color = '#999'
-
-  return <li key={index} style={style}>{message.text}</li>
-}
-
 const Messages = ({ channel, messages }) => {
   return (
     <Col sm={9} md={10} smOffset={3} mdOffset={2} className="main">
-      <h1>{channel.name}</h1>{channel.description}
+      <h1>
+        {channel.name}
+      </h1>
+      {channel.description}
       <hr />
       <ul className="list-unstyled">
-        {messages.map((message, index) => renderMessage(message, index))}
+        {messages.map((message, index) =>
+          <Message key={index} message={message} />
+        )}
       </ul>
     </Col>
   )
