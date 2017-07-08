@@ -53,6 +53,10 @@ export default (state = defaultState, action) => {
       return updateChannelMessages(state, event, 'FAILED')
     }
 
+    case 'LIST_ALL_MESSAGES_SUCCESS': {
+      return action.payload
+    }
+
     default:
       return state
   }
