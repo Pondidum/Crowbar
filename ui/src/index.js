@@ -14,8 +14,7 @@ import ChatApp from './base/chatApp'
 import LandingPage from './base/landing'
 import UserPage from './user'
 import reducers from './reducers'
-
-import { listAllChannels } from './channels/actions'
+import initialise from './initialise'
 
 const history = createHistory()
 const middleware = routerMiddleware(history)
@@ -29,7 +28,7 @@ const store = createSToreWithMiddleware(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-store.dispatch(listAllChannels())
+initialise(store.dispatch)
 
 render(
   <Provider store={store}>
