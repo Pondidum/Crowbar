@@ -9,12 +9,12 @@
     },
     {
       "Effect": "Allow",
-      "Action": ["dynamodb:PutItem"],
+      "Action": ["dynamodb:PutItem", "dynamodb:DeleteTable"],
       "Resource": ["arn:aws:dynamodb:*:*:*"]
     },
     {
       "Effect": "Allow",
-      "Action": ["s3:GetObject*", "s3:PutObject*"],
+      "Action": ["s3:GetObject*", "s3:PutObject*", "s3:DeleteObject*"],
       "Resource": ["arn:aws:s3:::${bucket_name}/*"]
     },
     {
