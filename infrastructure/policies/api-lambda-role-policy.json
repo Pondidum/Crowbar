@@ -1,57 +1,37 @@
 {
   "Version": "2012-10-17",
   "Statement": [
-      {
-          "Sid": "Stmt1493060054000",
-          "Effect": "Allow",
-          "Action": [
-              "lambda:InvokeAsync",
-              "lambda:InvokeFunction"
-          ],
-          "Resource": [
-              "arn:aws:lambda:*:*:*"
-          ]
-      },
-      {
-          "Effect": "Allow",
-          "Action": [
-              "dynamodb:PutItem"
-          ],
-          "Resource": [
-              "arn:aws:dynamodb:*:*:*"
-          ]
-      },
-      {
-          "Effect": "Allow",
-          "Action": [
-              "s3:GetObject*",
-              "s3:PutObject*"
-          ],
-          "Resource": [
-              "arn:aws:s3:::${bucket_name}/*"
-          ]
-      },
-      {
-          "Effect": "Allow",
-          "Action": [
-              "s3:ListBucket*"
-          ],
-          "Resource": [
-              "arn:aws:s3:::*"
-          ]
-      },
-      {
-          "Sid": "Stmt1493060108000",
-          "Effect": "Allow",
-          "Action": [
-              "logs:CreateLogGroup",
-              "logs:CreateLogStream",
-              "logs:DescribeLogStreams",
-              "logs:PutLogEvents"
-          ],
-          "Resource": [
-              "arn:aws:logs:*:*:*"
-          ]
-      }
+    {
+      "Sid": "Stmt1493060054000",
+      "Effect": "Allow",
+      "Action": ["lambda:InvokeAsync", "lambda:InvokeFunction"],
+      "Resource": ["arn:aws:lambda:*:*:*"]
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["dynamodb:PutItem"],
+      "Resource": ["arn:aws:dynamodb:*:*:*"]
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["s3:GetObject*", "s3:PutObject*", "s3:DeleteObject*"],
+      "Resource": ["arn:aws:s3:::${bucket_name}/*"]
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket*"],
+      "Resource": ["arn:aws:s3:::*"]
+    },
+    {
+      "Sid": "Stmt1493060108000",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:DescribeLogStreams",
+        "logs:PutLogEvents"
+      ],
+      "Resource": ["arn:aws:logs:*:*:*"]
+    }
   ]
 }
