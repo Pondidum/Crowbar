@@ -9,7 +9,7 @@
     },
     {
       "Effect": "Allow",
-      "Action": ["dynamodb:PutItem"],
+      "Action": ["dynamodb:PutItem", "dynamodb:Scan"],
       "Resource": ["arn:aws:dynamodb:*:*:*"]
     },
     {
