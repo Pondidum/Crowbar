@@ -1,16 +1,3 @@
-const updateView = require('./util/updateView')
+const project = require('./project')
 
-const allChannels = require('./projections/allchannels')
-const allUsers = require('./projections/allusers')
-const allMessages = require('./projections/allmessages')
-
-const projections = [allChannels, allUsers, allMessages]
-
-exports.handler = event => {
-  const promises = projections.map(project => {
-    const command = project(event)
-    return updateView(command)
-  })
-
-  return Promise.all(promises)
-}
+exports.handler = event => project(event)
