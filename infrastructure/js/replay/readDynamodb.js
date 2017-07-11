@@ -1,5 +1,5 @@
 const aws = require('aws-sdk')
-const dynamodb = new aws.DynamoDB()
+const dynamodb = new aws.DynamoDB.DocumentClient()
 
 module.exports = () =>
   new Promise((resolve, reject) => {
