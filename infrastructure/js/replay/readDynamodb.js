@@ -1,8 +1,9 @@
 const aws = require('aws-sdk')
-const dynamodb = new aws.DynamoDB.DocumentClient()
 
-module.exports = () =>
+module.exports = client =>
   new Promise((resolve, reject) => {
+    const dynamodb = client || new aws.DynamoDB.DocumentClient()
+
     var finalSet = []
     const nextBatch = lek => {
       const query = {
