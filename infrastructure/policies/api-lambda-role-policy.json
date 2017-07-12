@@ -32,6 +32,17 @@
         "logs:PutLogEvents"
       ],
       "Resource": ["arn:aws:logs:*:*:*"]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "kinesis:DescribeStream",
+        "kinesis:GetShardIterator",
+        "kinesis:GetRecords",
+        "kinesis:ListStreams",
+        "kinesis:PutRecords"
+      ],
+      "Resource": "arn:aws:kinesis:*:*:*"
     }
   ]
 }
