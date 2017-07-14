@@ -13,3 +13,8 @@ resource "aws_lambda_function" "crowbar_projections" {
   source_code_hash = "${base64sha256(file("${data.archive_file.lambda_projection.output_path}"))}"
   publish = true
 }
+
+resource "aws_s3_bucket" "storage" {
+  bucket = "${var.bucket_name}"
+  acl = "public-read"
+}
