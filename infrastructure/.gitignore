@@ -1,4 +1,6 @@
-build/
-terraform.tfstate
+*.tfstate
 *.tfstate.*
+.terraform/
+
+build/
 node_modules/
