@@ -19,7 +19,7 @@ resource "aws_iam_role_policy" "crowbar_projection_lambda_role_policy" {
 
 data "archive_file" "lambda_projection" {
   type = "zip"
-  source_dir = "./js/projection"
+  source_dir = "./src"
   output_path = "./build/lambda_projection.zip"
 }
 
