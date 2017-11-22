@@ -18,7 +18,7 @@ resource "aws_iam_role_policy" "crowbar_admin_lambda_role_policy" {
 
 data "archive_file" "lambda_admin" {
   type = "zip"
-  source_dir = "./js/admin"
+  source_dir = "./src"
   output_path = "./build/lambda_admin.zip"
 }
 
