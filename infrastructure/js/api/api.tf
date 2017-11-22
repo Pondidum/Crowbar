@@ -1,7 +1,25 @@
 data "archive_file" "lambda_api" {
   type = "zip"
-  source_dir = "./js/api"
+  source_dir = "./src"
   output_path = "./build/lambda_api.zip"
+}
+
+data "template_file" "api_lambda_policy" {
+  template = "${file("policies/api-lambda-role-policy.json")}"
+  vars {
+    bucket_name = "${var.bucket_name}"
+  }
+}
+
+resource "aws_iam_role" "crowbar_lambda_role" {
+  name = "crowbar_lambda_role"
+  assume_role_policy = "${file("policies/api-lambda-role.json")}"
+}
+
+resource "aws_iam_role_policy" "crowbar_lambda_role_policy" {
+  name = "crowbar_lambda_role_policy"
+  role = "${aws_iam_role.crowbar_lambda_role.id}"
+  policy = "${data.template_file.api_lambda_policy.rendered}"
 }
 
 resource "aws_lambda_function" "crowbar_api_event_lambda" {
