@@ -6,7 +6,6 @@ resource "aws_lambda_permission" "allow_api_gateway" {
   source_arn = "arn:aws:execute-api:${var.region}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.crowbar_event_api.id}/*/${aws_api_gateway_method.events_post.http_method}${aws_api_gateway_resource.events.path}"
 }
 
-
 resource "aws_api_gateway_rest_api" "crowbar_event_api" {
   name = "Crowbar Event Api"
   description = "Http api for consuming Crowbar events"

@@ -41,22 +41,3 @@ resource "aws_lambda_function" "crowbar_cognito_post_confirmation" {
   source_code_hash = "${base64sha256(file("${data.archive_file.lambda_api.output_path}"))}"
   publish = true
 }
-
-resource "aws_dynamodb_table" "event_store" {
-  name = "CrowbarEvents"
-  write_capacity = 5
-  read_capacity = 20
-
-  hash_key = "eventId"
-  range_key = "timestamp"
-
-  attribute {
-    name = "eventId"
-    type = "S"
-  }
-
-  attribute {
-    name = "timestamp"
-    type = "N"
-  }
-}
